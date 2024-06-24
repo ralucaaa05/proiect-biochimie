@@ -1,0 +1,20 @@
+Project Commands
+LIST
+  COMMANDS Lists all available commands                                                                           (1)
+  PATIENTS Lists all available patients                                                                           (2)
+  GROUPS Lists all available patient groups                                                                       (3)
+GET
+  PATIENT "patient_name" Prints all analysis values of the selected patient                                       (4)
+  PATIENT: "patient_name" ANALYSIS:"analysis_name" Prints the selected analysis value of the patient               (5)
+  GROUP: "group_name" ANALYSIS:"analysis_name" Prints the selected analysis value and stdev of the group           (6)
+  GROUP: "group_name" Prints all available analysis values and stdevs of the group                                 (7)
+SET
+  PATIENT:"patient_name" ANALYSIS:"analysis_name" ==> input() ==> confirmation message - Replaces the analysis value of the selected patient             (8)
+ADD
+  PATIENT:"patient_name" Adds a new patient with all the given analysis values                                    (9)
+DELETE
+  PATIENT:"patient_name" Deletes the selected patient from the excel                                              (10)
+COMPARE
+  GROUP1:"group_name" GROUP2:"group_name" T-test between the 2 selected groups and prints the p-value             (11)
+PLOT
+  ANALYSIS:"analysis_name"  Plots a bar graph with the selected analysis values from the all available groups     (12)
