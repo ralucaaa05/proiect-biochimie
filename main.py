@@ -27,8 +27,24 @@ def get_sheets():
 
 
 def input_parser(command):
+    command = command.split()
+    new_args = []
+    tmp = ""
+    for i in range(len(command)):
+        if command[i].startswith('"') and not command[i].endswith('"'):
+            tmp += command[i] + " "
+        elif command[i].endswith('"') and not command[i].startswith('"'):
+            tmp += command[i]
+            new_args.append(tmp)
+            tmp = ""
+        else:
+            new_args.append(command[i])
+    command_str_list = new_args    
+    
+    
     get_sheets()
-    command_str_list = command.split()
+    
+    
     if command_str_list[0] in commands_map.keys():
         commands_map[command_str_list[0]](patient_data, group_dict, *command_str_list[1:]) #if comm is "LIST" => list_comm(arg)
     else:
