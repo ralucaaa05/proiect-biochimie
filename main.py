@@ -1,4 +1,4 @@
-import pandas as pd
+import pandas as pd #
 from commands import *
 import os
 
@@ -14,7 +14,6 @@ commands_map = {
     "PLOT": plot_comm,
 }
 
-
 def get_sheets():
     global patient_data
     sheets = os.listdir("data")
@@ -26,7 +25,7 @@ def get_sheets():
                 group_dict[name.replace(".xlsx", "").replace("group", "").strip()] = pd.read_excel(f"data/{name}").set_index("Patient Code")
 
 
-def input_parser(command):
+def input_parser(command: str):
     command = command.split()
     new_args = []
     tmp = ""
