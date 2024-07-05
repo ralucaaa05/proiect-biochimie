@@ -8,20 +8,26 @@ def list_comm(patient_data, groups_dict, arg):
     if arg == "COMMANDS":
         print(message)
     if arg == "PATIENTS":
-        print(patient_data.index.values) # cum patient_data e un DataFrame, .index.value iti listeaza/returneaza "valorile" din index (numele in cazul acesta)
+        print(patient_data.index.values) # cum patient_data e un DataFrame, .index.value iti listeaza/returneaza "valorile" din index (care a fost setat ca `Name` in cazul acesta)
     if arg == "GROUPS":
         print([key for key in groups_dict.keys()])  
 
 # 
 def get_comm(patient_data, groups_dict: dict, *args):
-    test_set = set([x for group in groups_dict.values() for x in list(group.columns)]) #.columns iti returneaza o lista cu denumirea coloanelor, mai putin a index ului (vezi in util varianta extinsa, fara list comprehension)
+    """_summary_
+
+    Args:
+        patient_data (_type_): _description_
+        groups_dict (dict): _description_
+    """
+    test_set = set([x for group in groups_dict.values() for x in list(group.columns)]) # NOTE: PROPERTY NOT METHOD/FUNCTION .columns iti returneaza o lista cu denumirea coloanelor, mai putin a index ului (vezi in util varianta extinsa, fara list comprehension)
     if args[0] == "PATIENT":
         patient_code = patient_data.loc[args[1].replace('"', "")]["Patient Code"] # args[1] reprezinta numele pacientului; .loc returneaza "obiectul" corespondent randului din pacient_data; ["Pacient Code"] iti returneaza valoarea coloanei "Patient Code" din randul accesat anterior (.loc)
         if len(args) == 2:
             for k, v in groups_dict.items(): # k=key si v=value, ref: https://realpython.com/iterate-through-dictionary-python/
                 try:
                     print(f"Group: {k}\n {v.loc[patient_code]}") # /n = enter (new line); key = numele grupului si value = DataFrame
-                except KeyError: # pt a nu da eroare in cazul in care patient code ul nu se gaseste in toate DataFrame 
+                except KeyError: # pt a nu da eroare in cazul in care "Patient Code"-ul nu se gaseste in toate DataFrame 
                     pass
             return
 
@@ -55,10 +61,10 @@ def set_comm(patient_data, groups_dict, *args):
         if test_name in test:
             for k, v in groups_dict.items():
                 try:
-                    tmp = args[1].replace('"', "") # tmp ul asta poate fi  usor trace uit si se observa ca e "patient_name" si nu l-am numit direct asa ca sa nu se confunde
-                    print(f"The current value of {test} for {tmp} in the {k} Group is: {v.loc[patient_code][test]}")
-                    v.at[patient_code, test] = float(input(f"Enter the new value for {test}: ")) # .at e proprietatea de a atribui 
-                    print(f"The new value of {test} for {tmp} the {k} Group is: {v.loc[patient_code][test]}") # Confirmare ca s-a efectuat schimbarea valorii
+                    patient_name = args[1].replace('"', "")
+                    print(f"The current value of {test} for {patient_name} in the {k} Group is: {v.loc[patient_code][test]}")
+                    v.at[patient_code, test] = float(input(f"Enter the new value for {test}: ")) # .at e proprietatea de a atribui
+                    print(f"The new value of {test} for {patient_name} the {k} Group is: {v.loc[patient_code][test]}") # Confirmare ca s-a efectuat schimbarea valorii
                 except KeyError:
                     pass
 
