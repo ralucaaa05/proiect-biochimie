@@ -3,16 +3,16 @@ import pandas as pd
 from scipy.stats import ttest_ind
 import matplotlib.pyplot as plt
 
-
+# functia asta se ocupa cu enumerarea/listarea comenzilor, pacientilor si a grupurilor disponibile
 def list_comm(patient_data, groups_dict, arg):
     if arg == "COMMANDS":
         print(message)
     if arg == "PATIENTS":
-        print(patient_data.index.values)
+        print(patient_data.index.values) # cum patient_data e un DataFrame, .index.value iti listeaza/returneaza "valorile" din index (numele in cazul acesta)
     if arg == "GROUPS":
-        print([key for key in groups_dict.keys()])
+        print([key for key in groups_dict.keys()])  
 
-
+# 
 def get_comm(patient_data, groups_dict: dict, *args):
     test_set = set([x for group in groups_dict.values() for x in list(group.columns)]) #.columns iti returneaza o lista cu denumirea coloanelor, mai putin a index ului (vezi in util varianta extinsa, fara list comprehension)
     if args[0] == "PATIENT":
@@ -38,7 +38,7 @@ def get_comm(patient_data, groups_dict: dict, *args):
         group = args[1].replace('"', "")
         if group in groups_dict.keys():
             if len(args) == 2:
-                print(groups_dict[group].std()) # datorita minunatiei de pandas, ai metoda .std() (C)
+                print(groups_dict[group].std()) # datorita minunatiei de pandas, ai metoda .std() (C) care iti calculeaza std-ul pe DataFrame ul ales
                 return
             test_name = args[-1].replace('"', "")
             for test in test_set:
@@ -79,7 +79,7 @@ def add_comm(patient_data, groups_dict, *args):
             new_data[col] = patient_code
             continue
         new_data[col] = input(f"{col}: ")
-    patient_data.append(pd.Series(new_data, name=patient_name)) #name este un parametru din pd.Series ;name=patient_name odata apend uit devine index in DataFrame; Series devine astfel un nou rand in DataFrame
+    patient_data.append(pd.Series(new_data, name=patient_name)) # name este un parametru din pd.Series; name=patient_name odata apend uit devine index in DataFrame; Series devine astfel un nou rand in DataFrame
     
     print("Please enter patient Analysis/test data:\n")
     test_data = {}
@@ -96,7 +96,7 @@ def add_comm(patient_data, groups_dict, *args):
 # NOTE: NOT TESTED!
 def delete_comm(patient_data, groups_dict, *args):
     patient_name = args[1].replace('"', "")
-    patient_code = patient_code = patient_data.loc[args[1].replace('"', "")]["Patient Code"]
+    patient_code = patient_data.loc[args[1].replace('"', "")]["Patient Code"]
     patient_data.drop(patient_name)
     for group in groups_dict.values():
         try:
