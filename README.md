@@ -1,2 +1,12 @@
 # proiect-biochimie
-Given some Excel sheets, this project offers some macros/commands to easily access the most common data from a patients database, and perform the most basic analysis
+
+### Install instructions
+
+```bash
+pip install -r requirements.txt
+```
+
+### Run instructions
+ ```bash
+ python main.py
+ ```
