@@ -15,8 +15,9 @@ commands_map = {
 }  # Dictionar utilitar: coreleaza string-urile asociate comenzilor din terminal, cu functiile corespondente
 
 
-# Functie utilitara: importarea excelurilor ca DataFrame
+
 def get_sheets():
+    """ Functie utilitara: importarea excelurilor ca DataFrame"""
     global patient_data
     sheets = os.listdir(
         "data"
@@ -28,22 +29,24 @@ def get_sheets():
                     f"data/{name}"
                 ).set_index(
                     "Name"
-                )  # aici se creaza DataFrame pt excelul Pacient Codes si se seteaza indexul la coloana "Name"
+                )  # Se creaza DataFrame pt excelul Pacient Codes si se seteaza indexul la coloana "Name"
             if "group" in name:
                 group_dict[name.replace(".xlsx", "").replace("group", "").strip()] = (
                     pd.read_excel(f"data/{name}").set_index("Patient Code")
-                )  # la fel ca mai sus
+                )  
 
 
-# Functia de parsae-are a comenzilor (string) din terminal
+
 def input_parser(command: str):
+    """     Functia de parsae-are a comenzilor (string) din terminal
+    """
     command = command.split()  # Metoda .split iti creaza o lista cu fiecare string in parte, avand ca delimitator "backspace-ul"
     new_args = []
     tmp = ""
 
     for i in range(
         len(command)
-    ):  # acest for face posibila cautarea pacientului dupa nume (ex: comanda .split ar fi despartit numele in ["John, Doe", "Alex, Garcia"], iar comenzile de mai jos iti despart corect numele => " ["John Doe","Alex Garcia"] "
+    ):  # If-ul si elif-ul au ca scop de localizarea pacientului dupa nume (ex: comanda .split ar fi despartit numele in ["John, Doe", "Alex, Garcia"], iar comenzile de mai jos iti despart corect numele => " ["John Doe","Alex Garcia"] "
         if command[i].startswith('"') and not command[i].endswith('"'):
             tmp += command[i] + " "
         elif command[i].endswith('"') and not command[i].startswith('"'):
@@ -60,7 +63,7 @@ def input_parser(command: str):
     if command_str_list[0] in commands_map.keys():
         commands_map[command_str_list[0]](
             patient_data, group_dict, *command_str_list[1:]
-        )  # if comm is "LIST" => list_comm(arg)
+        )  # Este apelata functia corespunzatoare comenzii din commands_map, trecand restul argumentelor; if comm is "LIST" => list_comm(arg)
     else:
         print("Error! Command is not valid or there is a typo :)")
 

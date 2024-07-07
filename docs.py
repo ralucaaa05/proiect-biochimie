@@ -34,13 +34,13 @@ Example: LIST GROUPS
 Example: GET PATIENT {bcolors.OKCYAN}"John Doe"{bcolors.ENDC}
 
 {bcolors.OKGREEN}GET PATIENT{bcolors.ENDC} {bcolors.OKCYAN}"Patient-name"{bcolors.ENDC} {bcolors.OKGREEN}ANALYSIS{bcolors.ENDC} {bcolors.OKCYAN}"Analysis-name"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} Prints the selected analysis value of the patient
-Example: GET PATIENT {bcolors.OKCYAN}"John Doe"{bcolors.ENDC} {bcolors.OKGREEN}ANALYSIS{bcolors.ENDC} {bcolors.OKCYAN}"Blood Pressure"{bcolors.ENDC}
+Example: GET PATIENT {bcolors.OKCYAN}"John Doe"{bcolors.ENDC} {bcolors.OKGREEN}ANALYSIS{bcolors.ENDC} {bcolors.OKCYAN}"HDL"{bcolors.ENDC}
 
 {bcolors.OKGREEN}GET GROUP{bcolors.ENDC} {bcolors.OKCYAN}"Group-name"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} Prints all available analysis values and stdevs of the group 
 Example: GET GROUP {bcolors.OKCYAN}"Group A"{bcolors.ENDC}
 
 {bcolors.OKGREEN}SET PATIENT{bcolors.ENDC} {bcolors.OKCYAN}"Patient-name"{bcolors.ENDC} {bcolors.OKGREEN}ANALYSIS{bcolors.ENDC} {bcolors.OKCYAN}"Analysis-name"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} Replaces the analysis value of the selected patient
-Example: SET PATIENT {bcolors.OKCYAN}"John Doe"{bcolors.ENDC} {bcolors.OKGREEN}ANALYSIS{bcolors.ENDC} {bcolors.OKCYAN}"Blood Pressure"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} 120/80
+Example: SET PATIENT {bcolors.OKCYAN}"John Doe"{bcolors.ENDC} {bcolors.OKGREEN}ANALYSIS{bcolors.ENDC} {bcolors.OKCYAN}"HDL"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} {bcolors.BOLD} 55 (mg/dL) {bcolors.ENDC}
 
 {bcolors.OKGREEN}ADD PATIENT{bcolors.ENDC} {bcolors.OKCYAN}"Patient-name"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} Adds a new patient with all the given analysis values
 Example: ADD PATIENT {bcolors.OKCYAN}"Jane Smith"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} Adds Jane Smith to the patient list
@@ -49,7 +49,7 @@ Example: ADD PATIENT {bcolors.OKCYAN}"Jane Smith"{bcolors.ENDC} {bcolors.OKBLUE}
 Example: DELETE PATIENT {bcolors.OKCYAN}"John Doe"{bcolors.ENDC}
 
 {bcolors.OKGREEN}COMPARE GROUP1{bcolors.ENDC} {bcolors.OKCYAN}"Group_name"{bcolors.ENDC} {bcolors.OKGREEN}GROUP2{bcolors.ENDC} {bcolors.OKCYAN}"Group_name"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} T-test between the 2 selected groups and prints the p-value
-Example: COMPARE GROUP1 {bcolors.OKCYAN}"Group A"{bcolors.ENDC} {bcolors.OKGREEN}GROUP2{bcolors.ENDC} {bcolors.OKCYAN}"Group B"{bcolors.ENDC}
+Example: COMPARE GROUP1 {bcolors.OKCYAN}"Group A"{bcolors.ENDC} GROUP2 {bcolors.OKCYAN}"Group B"{bcolors.ENDC}
 
 {bcolors.OKGREEN}PLOT ANALYSIS{bcolors.ENDC} {bcolors.OKCYAN}"Analysis-name"{bcolors.ENDC} {bcolors.OKBLUE}==>{bcolors.ENDC} Plots a bar graph with the selected analysis values from the all available groups
-Example: PLOT ANALYSIS {bcolors.OKCYAN}"Blood Pressure"{bcolors.ENDC}"""
+Example: PLOT ANALYSIS {bcolors.OKCYAN}"HDL"{bcolors.ENDC}"""
