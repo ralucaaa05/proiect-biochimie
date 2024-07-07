@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 def list_comm(patient_data, groups_dict, arg): 
     """
-     Functia listeaza diferite informatii în functie de argumentul `arg`:
+     Functia listeaza diferite informatii în functie de argumentul 'arg':
     - "COMMANDS": Afiseaza un mesaj predefinit (care se gaseste in docs.py)
     - "PATIENTS": Deoarece patient_data e un DataFrame, .index.value iti listeaza/returneaza "valorile" din index.
     - "GROUPS": Afiseaza toate grupurile (cheile din `groups_dict`).
@@ -19,18 +19,18 @@ def list_comm(patient_data, groups_dict, arg):
     if arg == "GROUPS":
         print([key for key in groups_dict.keys()])  
 
-# 
+ 
 def get_comm(patient_data, groups_dict: dict, *args):
     """ 
-    Functia aceasta afiseaza datele pentru un pacient sau un grup specificat în `args`.
+    Functia aceasta afiseaza datele pentru un pacient sau un grup specificat în 'args'.
     - "PATIENT": Afiseaza datele pentru un pacient specificat.
     - "GROUP": Afiseaza deviatia standard pentru un grup specificat.
     """
-    test_set = set([x for group in groups_dict.values() for x in list(group.columns)]) # Proprietatea .columns iti returneaza o lista cu denumirea coloanelor, mai putin a index ului (vezi in util varianta extinsa, fara list comprehension)
+    test_set = set([x for group in groups_dict.values() for x in list(group.columns)]) # Proprietatea .columns iti returneaza o lista cu denumirea coloanelor, mai putin a index ului
     if args[0] == "PATIENT":
         patient_code = patient_data.loc[args[1].replace('"', "")]["Patient Code"] # args[1] reprezinta numele pacientului; .loc returneaza "obiectul" corespondent randului din pacient_data; ["Pacient Code"] iti returneaza valoarea coloanei "Patient Code" din randul accesat anterior (.loc)
         if len(args) == 2:
-            for k, v in groups_dict.items(): # k=key si v=value
+            for k, v in groups_dict.items(): 
                 try:
                     print(f"Group: {k}\n {v.loc[patient_code]}")
                 except KeyError: # Pentru a nu da eroare in cazul in care "Patient Code"-ul nu se gaseste in toate DataFrame 
@@ -71,15 +71,15 @@ def set_comm(patient_data, groups_dict, *args):
                 try:
                     patient_name = args[1].replace('"', "")
                     print(f"The current value of {test} for {patient_name} in the {k} Group is: {v.loc[patient_code][test]}")
-                    v.at[patient_code, test] = float(input(f"Enter the new value for {test}: ")) # .at e proprietatea de a atribui
-                    print(f"The new value of {test} for {patient_name} the {k} Group is: {v.loc[patient_code][test]}") # Confirmare ca s-a efectuat schimbarea valorii
+                    v.at[patient_code, test] = float(input(f"Enter the new value for {test}: ")) # .at e proprietatea de a seta o valoare
+                    print(f"The new value of {test} for {patient_name} the {k} Group is: {v.loc[patient_code][test]}") # Confirmarea ca s-a efectuat schimbarea valorii
                 except KeyError:
                     pass
 
 
 
 def add_comm(patient_data, groups_dict, *args):
-    """ Functia adauga un nou pacient si datele aferente in `patient_data` si `groups_dict`.
+    """ Functia adauga un nou pacient si datele aferente in 'patient_data' si 'groups_dict'.
     """
     test_set = set([x for column in groups_dict.values() for x in list(column.columns)])
     patient_name = args[1].replace('"', "")
@@ -111,7 +111,7 @@ def add_comm(patient_data, groups_dict, *args):
     
 
 def delete_comm(patient_data, groups_dict, *args):
-    """    Functia iti sterge un pacient si datele aferente din `patient_data` si `groups_dict`.
+    """    Functia iti sterge un pacient si datele aferente din 'patient_data' si 'groups_dict'.
 """
     patient_name = args[1].replace('"', "")
     patient_code = patient_data.loc[args[1].replace('"', "")]["Patient Code"]
@@ -119,13 +119,13 @@ def delete_comm(patient_data, groups_dict, *args):
     for group in groups_dict.values():
         try:
             group.drop(patient_code)
-        except KeyError:
-            pass
+        except KeyError as e:
+            print(f'Pacient name {patient_name} could not be found! Error thrown: \n {e}')
     
 
 
 def compare_comm(patient_data, groups_dict, *args):
-    """     Functia iti compara două grupuri specificate în `args` folosind testul t.
+    """     Functia iti compara două grupuri specificate în 'args' folosind t testul.
 """
     test_set = set([x for column in groups_dict.values() for x in list(column.columns)])
     group1 = groups_dict[args[1].replace('"',"")]
@@ -138,7 +138,7 @@ def compare_comm(patient_data, groups_dict, *args):
 
 
 def plot_comm(patient_data, groups_dict, *args):
-    """     Plotează deviatia standard a unui test specificat pentru toate grupurile.
+    """     Ploteaza deviatia standard a unui test specificat pentru toate grupurile.
 """
     test_name = args[-1].replace('"', "")
     

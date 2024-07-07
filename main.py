@@ -38,7 +38,7 @@ def get_sheets():
 
 
 def input_parser(command: str):
-    """     Functia de parsae-are a comenzilor (string) din terminal
+    """     Functia de parsae-are a comenzilor (string) din terminal.
     """
     command = command.split()  # Metoda .split iti creaza o lista cu fiecare string in parte, avand ca delimitator "backspace-ul"
     new_args = []
@@ -46,7 +46,7 @@ def input_parser(command: str):
 
     for i in range(
         len(command)
-    ):  # If-ul si elif-ul au ca scop de localizarea pacientului dupa nume (ex: comanda .split ar fi despartit numele in ["John, Doe", "Alex, Garcia"], iar comenzile de mai jos iti despart corect numele => " ["John Doe","Alex Garcia"] "
+    ):  # Conditionalul are ca scop concatenarea printr-un spatiu a cuvintelor dintre ghilimele (ex: Metoda .split ar fi despartit numele in ["John, Doe", "Alex, Garcia"], iar comenzile de mai jos iti despart corect numele => " ["John Doe","Alex Garcia"] "
         if command[i].startswith('"') and not command[i].endswith('"'):
             tmp += command[i] + " "
         elif command[i].endswith('"') and not command[i].startswith('"'):
@@ -74,4 +74,4 @@ if __name__ == "__main__":
         input_command = input("Please enter the command:")
         if input_command == "EXIT" or input_command == "QUIT":
             break
-        input_parser(input_command)  # Main entry point in the program
+        input_parser(input_command)  # Punctul de intrare in program
